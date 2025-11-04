@@ -1,47 +1,100 @@
 :root {
-    --color-plank: #5d4037;        
-    --color-pivot: #333333;        
-    --color-background: #f4f4f4;   
-    --color-text-primary: #1a1a1a; 
-    --color-accent-blue: hsl(240, 70%, 50%); 
-    --color-accent-red: hsl(0, 70%, 50%); 
-    
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 16px;
-    --spacing-lg: 32px;
-    
-    --plank-length: 400px;
-    --plank-height: 20px;
+  --color-plank: #5d4037;
+  --color-pivot: #333333;
+  --color-background: #f4f4f4;
+  --color-card-background: #e9e9e9;
+  --color-text-primary: #1a1a1a;
+  --color-border-primary: #d4d4d4;
+  --color-accent-blue: hsl(240, 70%, 50%);
+  --color-accent-red: hsl(0, 70%, 50%);
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+
+  --plank-length: 400px;
+  --plank-height: 20px;
 }
 
 @font-face {
-    font-family: 'Montserrat';
-    src: url('./assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype-variations'); 
-    font-weight: 100 900; 
-    font-style: normal;
-    font-display: swap; 
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf")
+    format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
 }
 
-.container{
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: var(--spacing-lg);
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-lg);
+}
+
+.seesaw-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-lg);
+}
+.seesaw-settings {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.setting-box-type {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+}
+.setting-box-type .setting-title {
+  margin-right: var(--spacing-md);
+}
+.box-type-option,
+.box-type-option input,
+.box-type-option label {
+  cursor: pointer;
+}
+
+.seesaw-infos {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.seesaw-info-card {
+  background-color: var(--color-card-background);
+  height: 100px;
+  width: 100%;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid var(--color-border-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--spacing-xs);
 }

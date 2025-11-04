@@ -1,20 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css" />
     <title>Seesaw - Baran Arslan</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Font</h1>
+      <div class="seesaw-main">
+        <div class="seesaw-settings">
+          <div class="setting-box-type">
+            <h4 class="setting-title">Box Type:</h4>
+            <div class="box-type-option">
+              <input
+                type="radio"
+                id="rectangle"
+                name="boxType"
+                value="rectangle"
+                checked
+              />
+              <label for="rectangle">Rectangle</label>
+            </div>
+            <div class="box-type-option">
+              <input type="radio" id="circle" name="boxType" value="circle" />
+              <label for="circle">Circle</label>
+            </div>
+          </div>
+        </div>
+        <div class="seesaw-infos">
+          <div class="seesaw-info-card">
+            <p class="info-card-title">Left Weight</p>
+            <h3 class="info-card-content">25.0 kg</h3>
+          </div>
+          <div class="seesaw-info-card">
+            <p class="info-card-title">Right Weight</p>
+            <h3 class="info-card-content">45.0 kg</h3>
+          </div>
+          <div class="seesaw-info-card">
+            <p class="info-card-title">Next Weight</p>
+            <h3 class="info-card-content">8.0 kg</h3>
+          </div>
+          <div class="seesaw-info-card">
+            <p class="info-card-title">Tilt Angle</p>
+            <h3 class="info-card-content">17.5°</h3>
+          </div>
+        </div>
+      </div>
     </div>
 
-
-
-
     <script src="/script.js"></script>
-</body>
+  </body>
 </html>
