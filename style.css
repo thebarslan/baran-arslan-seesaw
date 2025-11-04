@@ -8,10 +8,16 @@
   --color-accent-blue: hsl(240, 70%, 50%);
   --color-accent-red: hsl(0, 70%, 50%);
 
+  --color-canvas-border: rgb(208, 212, 143);
+  --color-canvas-background: #edf1dd;
+  --color-canvas-button: rgb(255, 217, 0);
+  --color-canvas-button-hover: rgb(248, 197, 29);
+
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
   --spacing-lg: 32px;
+  --spacing-xl: 48px;
 
   --plank-length: 400px;
   --plank-height: 20px;
@@ -30,10 +36,19 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+.shadow-sm {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.shadow-md {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.178);
+}
+.shadow-lg {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
   background-color: var(--color-background);
   color: var(--color-text-primary);
 }
@@ -53,10 +68,13 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
+  border-radius: 12px;
 }
+
+/* Seesaw Settings */
 .seesaw-settings {
   display: flex;
   width: 100%;
@@ -77,6 +95,7 @@ body {
   cursor: pointer;
 }
 
+/* Seesaw Infos */
 .seesaw-infos {
   width: 100%;
   display: grid;
@@ -97,4 +116,111 @@ body {
   flex-direction: column;
   justify-content: center;
   gap: var(--spacing-xs);
+}
+
+/* Seesaw Canvas */
+.seesaw-canvas {
+  width: 100%;
+  height: 450px;
+  background-color: var(--color-canvas-background);
+  border: 1px solid var(--color-canvas-border);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.seesaw-reset-button {
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: var(--color-canvas-button);
+  color: var(--color-text-primary);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+.seesaw-reset-button:hover {
+  background-color: var(--color-canvas-button-hover);
+}
+
+.seesaw-plank {
+  width: var(--plank-length);
+  height: var(--plank-height);
+  background-color: var(--color-plank);
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  border-radius: 4px;
+  z-index: 100;
+}
+.seesaw-pivot {
+  position: absolute;
+  bottom: 50% + 30px;
+  left: 50%;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 40px 60px 40px;
+  border-color: transparent transparent var(--color-pivot) transparent;
+  transform: translate(-50%, 50%);
+}
+
+.seesaw-logs {
+  width: 100%;
+  max-height: 140px;
+  border: 1px solid var(--color-border-primary);
+  height: 150px;
+  border-radius: 8px;
+  padding-left: var(--spacing-md);
+  background-color: var(--color-background);
+}
+.seesaw-logs-list {
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-right: var(--spacing-md);
+}
+.seesaw-logs-list::-webkit-scrollbar {
+  width: 4px;
+}
+.seesaw-logs-list::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-primary);
+  border-radius: 2px;
+}
+.seesaw-logs-list .seesaw-log:last-child {
+  border-bottom: none;
+}
+.seesaw-log {
+  border-bottom: 1px solid var(--color-border-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md) 0;
+}
+
+.log-weigth {
+  height: 24px;
+  width: 28px;
+  background-color: var(--color-accent-blue);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.log-weigth p {
+  font-size: 16px;
+  font-weight: 600;
+}
+.log-text span {
+  font-weight: 600;
 }
