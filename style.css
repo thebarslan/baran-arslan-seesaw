@@ -8,11 +8,6 @@
   --color-accent-blue: hsl(240, 70%, 50%);
   --color-accent-red: hsl(0, 70%, 50%);
 
-  --color-canvas-border: rgb(143, 184, 212);
-  --color-canvas-background: #dde6f1;
-  --color-canvas-button: rgb(85, 130, 226);
-  --color-canvas-button-hover: rgb(112, 148, 226);
-
   --spacing-xs: 4px;
   --spacing-sm: 8px;
   --spacing-md: 16px;
@@ -405,4 +400,75 @@ body {
 }
 .log-text span {
   font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --plank-length: 380px;
+  }
+  .container {
+    padding: var(--spacing-md);
+  }
+
+  .seesaw-main {
+    padding: var(--spacing-md);
+  }
+
+  .seesaw-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .seesaw-settings-container {
+    width: 300px;
+    left: 0;
+  }
+
+  .seesaw-infos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  .seesaw-info-card {
+    height: 80px;
+  }
+
+  .seesaw-canvas {
+    height: 350px;
+  }
+
+  .seesaw-reset-button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 14px;
+  }
+
+  .setting-title {
+    font-size: 14px;
+  }
+
+  .theme-options {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xs);
+  }
+
+  .box-type-options {
+    gap: var(--spacing-md);
+  }
+
+  .seesaw-logs {
+    max-height: 120px;
+    padding-left: var(--spacing-sm);
+  }
+
+  .seesaw-log {
+    font-size: 13px;
+    padding: 6px 1px;
+  }
+  .log-text {
+    font-size: 12px;
+  }
+  .seesaw-log-time p {
+    font-size: 11px;
+  }
 }

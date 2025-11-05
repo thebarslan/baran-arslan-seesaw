@@ -18,9 +18,7 @@ const tiltAngleInfo = document.querySelector(
 );
 
 const logsList = document.querySelector(".seesaw-logs-list");
-
 const boxList = document.querySelector(".box-list");
-const boxTypeInputs = document.querySelectorAll('input[name="boxType"]');
 
 let logs = [];
 let weights = [];
