@@ -215,22 +215,6 @@ const resetSeesaw = () => {
 
 resetButton.addEventListener("click", resetSeesaw);
 
-const testAddWeights = () => {
-  const testSequence = [
-    { weight: 10, direction: "right", position: 30 },
-    { weight: 5, direction: "left", position: -50 },
-    { weight: 8, direction: "right", position: 25 },
-    { weight: 3, direction: "left", position: -30 },
-    { weight: 7, direction: "right", position: 0 },
-  ];
-
-  testSequence.forEach((item, i) => {
-    setTimeout(() => {
-      addWeight(item.weight, item.direction, item.position);
-    }, i * 2000);
-  });
-};
-
 const getRandomWeight = () => {
   return (
     Math.floor(Math.random() * (CONFIG.maxWeight - CONFIG.minWeight + 1)) +
@@ -350,21 +334,3 @@ if (settingsToggle && settingsContainer) {
     }
   });
 }
-
-const themeInputs = document.querySelectorAll('input[name="theme"]');
-const body = document.body;
-
-themeInputs.forEach((input) => {
-  input.addEventListener("change", (e) => {
-    const selectedTheme = e.target.value;
-
-    body.classList.remove(
-      "theme-sky",
-      "theme-sun",
-      "theme-forest",
-      "theme-night"
-    );
-
-    body.classList.add(`theme-${selectedTheme}`);
-  });
-});
