@@ -23,6 +23,34 @@
   --plank-height: 20px;
 }
 
+.theme-sky {
+  --color-canvas-border: rgb(143, 184, 212);
+  --color-canvas-background: #dde6f1;
+  --color-canvas-button: rgb(85, 130, 226);
+  --color-canvas-button-hover: rgb(112, 148, 226);
+}
+
+.theme-sun {
+  --color-canvas-border: rgb(255, 200, 150);
+  --color-canvas-background: #fff2d5;
+  --color-canvas-button: rgb(255, 170, 60);
+  --color-canvas-button-hover: rgb(255, 190, 90);
+}
+
+.theme-forest {
+  --color-canvas-border: rgb(150, 200, 150);
+  --color-canvas-background: #e4f1e4;
+  --color-canvas-button: rgb(60, 160, 80);
+  --color-canvas-button-hover: rgb(80, 180, 100);
+}
+
+.theme-night {
+  --color-canvas-border: rgb(13, 1, 83);
+  --color-canvas-background: #0a042c91;
+  --color-canvas-button: rgb(83, 70, 168);
+  --color-canvas-button-hover: rgb(91, 74, 158);
+}
+
 @font-face {
   font-family: "Montserrat";
   src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf")
@@ -32,6 +60,11 @@
   font-display: swap;
 }
 
+body,
+.seesaw-canvas,
+.seesaw-reset-button {
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -75,16 +108,78 @@ body {
 }
 
 /* Seesaw Settings */
-.seesaw-settings {
+
+.seesaw-header {
   display: flex;
-  width: 100%;
+  justify-content: space-between;
   align-items: center;
 }
-
+.seesaw-settings {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.seesaw-title {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+.seesaw-title h5 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+.seesaw-settings-toggle-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 8px;
+  gap: var(--spacing-sm);
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--color-background);
+}
+.seesaw-settings-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  top: 48px;
+  right: 0px;
+  width: 300px;
+  padding: var(--spacing-md);
+  z-index: 1000;
+  background-color: var(--color-background);
+  border-radius: 8px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: max-height 260ms ease, opacity 180ms ease,
+    transform 200ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  pointer-events: none;
+}
+.seesaw-settings-container.open {
+  max-height: 400px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 .setting-box-type {
   display: flex;
-  flex-direction: row;
-  gap: var(--spacing-md);
+  flex-direction: column;
+}
+.box-type-options {
+  margin-top: var(--spacing-md);
+  display: flex;
+  gap: var(--spacing-lg);
+}
+.theme-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
 }
 .setting-box-type .setting-title {
   margin-right: var(--spacing-md);

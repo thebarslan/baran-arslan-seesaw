@@ -332,3 +332,39 @@ window.addEventListener("DOMContentLoaded", () => {
   createOrUpdatePreview(nextWeight, 0);
   hidePreview();
 });
+const settingsToggle = document.querySelector(".seesaw-settings-toggle-button");
+const settingsContainer = document.querySelector(".seesaw-settings-container");
+
+if (settingsToggle && settingsContainer) {
+  settingsToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    settingsContainer.classList.toggle("open");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (
+      !settingsContainer.contains(e.target) &&
+      !settingsToggle.contains(e.target)
+    ) {
+      settingsContainer.classList.remove("open");
+    }
+  });
+}
+
+const themeInputs = document.querySelectorAll('input[name="theme"]');
+const body = document.body;
+
+themeInputs.forEach((input) => {
+  input.addEventListener("change", (e) => {
+    const selectedTheme = e.target.value;
+
+    body.classList.remove(
+      "theme-sky",
+      "theme-sun",
+      "theme-forest",
+      "theme-night"
+    );
+
+    body.classList.add(`theme-${selectedTheme}`);
+  });
+});
