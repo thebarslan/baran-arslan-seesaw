@@ -23,6 +23,7 @@
   --color-canvas-background: #dde6f1;
   --color-canvas-button: rgb(85, 130, 226);
   --color-canvas-button-hover: rgb(112, 148, 226);
+  --color-log-kilo-background: #085b9b;
 }
 
 .theme-sun {
@@ -30,6 +31,7 @@
   --color-canvas-background: #fff2d5;
   --color-canvas-button: rgb(255, 170, 60);
   --color-canvas-button-hover: rgb(255, 190, 90);
+  --color-log-kilo-background: rgb(255, 170, 60);
 }
 
 .theme-forest {
@@ -37,13 +39,15 @@
   --color-canvas-background: #e4f1e4;
   --color-canvas-button: rgb(60, 160, 80);
   --color-canvas-button-hover: rgb(80, 180, 100);
+  --color-log-kilo-background: #06811a;
 }
 
 .theme-night {
   --color-canvas-border: rgb(13, 1, 83);
-  --color-canvas-background: #0a042c91;
-  --color-canvas-button: rgb(83, 70, 168);
-  --color-canvas-button-hover: rgb(91, 74, 158);
+  --color-canvas-background: #02000a48;
+  --color-canvas-button: rgb(144, 129, 238);
+  --color-canvas-button-hover: rgb(166, 156, 231);
+  --color-log-kilo-background: rgb(13, 1, 83);
 }
 
 @font-face {
@@ -383,12 +387,13 @@ body {
 .log-weigth {
   height: 24px;
   width: 28px;
-  background-color: var(--color-accent-blue);
+  background-color: var(--color-log-kilo-background);
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+  transition: background-color 0.4s ease;
 }
 .log-weigth p {
   font-size: 14px;
@@ -404,7 +409,7 @@ body {
 
 @media (max-width: 768px) {
   :root {
-    --plank-length: 380px;
+    --plank-length: 300px;
   }
   .container {
     padding: var(--spacing-md);
