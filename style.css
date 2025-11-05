@@ -180,6 +180,14 @@ body {
   gap: var(--spacing-sm);
   margin-top: var(--spacing-md);
 }
+.theme-option,
+.theme-option input,
+.theme-option label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+}
 .setting-box-type .setting-title {
   margin-right: var(--spacing-md);
 }
@@ -271,7 +279,7 @@ body {
   width: 0px;
   height: 0px;
   border-style: solid;
-  border-width: 0 20px 106px 20px;
+  border-width: 0 20px 130px 20px;
   border-color: transparent transparent var(--color-pivot) transparent;
   transform: translate(-50%, 50%);
 }
@@ -464,6 +472,9 @@ body {
   .seesaw-logs {
     max-height: 120px;
     padding-left: var(--spacing-sm);
+  }
+  .seesaw-pivot {
+    border-width: 0 20px 80px 20px;
   }
 
   .seesaw-log {
