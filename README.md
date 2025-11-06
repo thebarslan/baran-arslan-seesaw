@@ -50,9 +50,9 @@ This project is a web-based simulation that visually demonstrates the concept of
 
 The balance of the seesaw is determined by the **moment of force** principle:
 
-\[
-\text{Torque} = \text{Force} \times \text{Distance from Pivot}
-\]
+
+Torque = Force * Distance from Pivot
+
 
 When torques on both sides are equal, the plank remains horizontal; otherwise, it tilts toward the heavier side.
 
