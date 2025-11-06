@@ -118,6 +118,16 @@ const addWeight = (weight, direction, position) => {
   boxList.appendChild(weightBox);
 
   updateSeesaw();
+
+  saveSeesawState(
+    plank,
+    logs,
+    leftWeight,
+    rightWeight,
+    nextWeight,
+    tiltAngle,
+    CONFIG
+  );
 };
 
 const createWeightBox = (weight, position) => {
@@ -133,6 +143,9 @@ const createWeightBox = (weight, position) => {
   const size = CONFIG.baseBoxSize * scale;
 
   updateBoxStyle(box, weight, size, boxType);
+
+  box.dataset.position = String(position);
+  box.dataset.weight = String(weight);
 
   let percentFromCenter = (position / CONFIG.maxPosition) * 50;
   let centerPercent = 50 + percentFromCenter;
@@ -330,6 +343,7 @@ window.addEventListener("DOMContentLoaded", () => {
     refreshPreviewForNext,
     updateSeesaw
   );
+
   if (loadedState) {
     logs = loadedState.logs;
     leftWeight = loadedState.leftWeight;
@@ -339,13 +353,16 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   requestAnimationFrame(() => {
-    if (!nextWeight) nextWeight = getRandomWeight();
-    updateInfoCards();
-    updateSeesaw();
-    setTimeout(() => {
-      createOrUpdatePreview(nextWeight, 0);
-      hidePreview();
-    }, 50);
+    requestAnimationFrame(() => {
+      if (!nextWeight) nextWeight = getRandomWeight();
+      updateInfoCards();
+
+      requestAnimationFrame(() => {
+        updateSeesaw();
+        createOrUpdatePreview(nextWeight, 0);
+        hidePreview();
+      });
+    });
   });
 });
 
@@ -377,3 +394,29 @@ function resetSeesaw() {
   updateInfoCards();
   clearSeesawState();
 }
+
+window.addEventListener("resize", () => {
+  Array.from(document.querySelectorAll(".weight-box:not(.preview)")).forEach(
+    (box) => {
+      const weight =
+        parseFloat(box.dataset.weight) || parseFloat(box.textContent) || 0;
+      const position = parseFloat(box.dataset.position) || 0;
+      const scale = Math.max(0.4, Math.min(3, 0.5 + weight / CONFIG.maxWeight));
+      const size = CONFIG.baseBoxSize * scale;
+
+      const percentFromCenter = (position / CONFIG.maxPosition) * 50;
+      const centerPercent = 50 + percentFromCenter;
+
+      const plankWidth = plank.offsetWidth || 1;
+      const halfBoxPercent = (size / 2 / plankWidth) * 100;
+      const minPercent = halfBoxPercent;
+      const maxPercent = 100 - halfBoxPercent;
+      const clampedCenter = Math.max(
+        minPercent,
+        Math.min(maxPercent, centerPercent)
+      );
+
+      box.style.left = `${clampedCenter}%`;
+    }
+  );
+});

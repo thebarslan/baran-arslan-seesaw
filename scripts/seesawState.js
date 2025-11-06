@@ -1,5 +1,3 @@
-// js/seesawState.js
-
 const SEESAW_STATE_KEY = "openSeesawState";
 
 export function saveSeesawState(
@@ -11,21 +9,24 @@ export function saveSeesawState(
   tiltAngle,
   CONFIG
 ) {
-  const boxList = document.querySelector(".box-list");
-
   const boxes = Array.from(document.querySelectorAll(".weight-box"))
     .filter((box) => !box.classList.contains("preview"))
     .map((box) => {
-      const plankRect = plank.getBoundingClientRect();
-      const boxRect = box.getBoundingClientRect();
-      const plankCenter = plankRect.left + plankRect.width / 2;
-      const boxCenter = boxRect.left + boxRect.width / 2;
-      const distanceFromCenter = boxCenter - plankCenter;
-      const position =
-        (distanceFromCenter / (plankRect.width / 2)) * CONFIG.maxPosition;
+      const storedPos = box.dataset.position;
+      let position = storedPos !== undefined ? parseFloat(storedPos) : null;
+
+      if (position === null || Number.isNaN(position)) {
+        const plankRect = plank.getBoundingClientRect();
+        const boxRect = box.getBoundingClientRect();
+        const plankCenter = plankRect.left + plankRect.width / 2;
+        const boxCenter = boxRect.left + boxRect.width / 2;
+        const distanceFromCenter = boxCenter - plankCenter;
+        position =
+          (distanceFromCenter / (plankRect.width / 2)) * CONFIG.maxPosition;
+      }
 
       return {
-        weight: parseFloat(box.textContent),
+        weight: parseFloat(box.dataset.weight || box.textContent) || 0,
         position,
         classList: [...box.classList],
       };
@@ -68,7 +69,7 @@ export function loadSeesawState(
   const { boxes, logs, leftWeight, rightWeight, nextWeight, tiltAngle } = state;
 
   boxList.innerHTML = "";
-  (boxes || []).forEach((b) => {
+  (state.boxes || []).forEach((b) => {
     const box = document.createElement("div");
     box.classList.add("weight-box");
 
@@ -78,8 +79,13 @@ export function loadSeesawState(
     const scale = Math.max(0.4, Math.min(3, 0.5 + b.weight / CONFIG.maxWeight));
     const size = CONFIG.baseBoxSize * scale;
     updateBoxStyle(box, b.weight, size, boxType);
+    const position =
+      typeof b.position === "number" ? b.position : parseFloat(b.position) || 0;
 
-    const percentFromCenter = (b.position / CONFIG.maxPosition) * 50;
+    box.dataset.position = String(position);
+    box.dataset.weight = String(b.weight);
+
+    const percentFromCenter = (position / CONFIG.maxPosition) * 50;
     const centerPercent = 50 + percentFromCenter;
 
     const plankWidth = plank.offsetWidth || 1;
