@@ -1,3 +1,9 @@
+import {
+  saveSeesawState,
+  loadSeesawState,
+  clearSeesawState,
+} from "./seesawState.js";
+
 const canvas = document.querySelector(".seesaw-canvas");
 const plank = document.querySelector(".seesaw-plank");
 const plankClickArea = document.querySelector(".plank-clickable-area");
@@ -19,6 +25,7 @@ const tiltAngleInfo = document.querySelector(
 
 const logsList = document.querySelector(".seesaw-logs-list");
 const boxList = document.querySelector(".box-list");
+const boxTypeInputs = document.querySelectorAll('input[name="boxType"]');
 
 let logs = [];
 let weights = [];
@@ -127,7 +134,7 @@ const createWeightBox = (weight, position) => {
 
   updateBoxStyle(box, weight, size, boxType);
 
-  let percentFromCenter = (position / 100) * 50;
+  let percentFromCenter = (position / CONFIG.maxPosition) * 50;
   let centerPercent = 50 + percentFromCenter;
 
   const plankWidth = plank.offsetWidth || 1;
@@ -193,22 +200,6 @@ const calculateTiltAngle = () => {
 const updateSeesaw = () => {
   tiltAngle = calculateTiltAngle();
   plank.style.transform = `translate(-50%, 50%) rotate(${tiltAngle}deg)`;
-};
-
-const resetSeesaw = () => {
-  leftWeight = 0;
-  rightWeight = 0;
-  tiltAngle = 0;
-  logs = [];
-  logsList.innerHTML = "";
-  boxList.innerHTML = "";
-
-  if (previewBox) {
-    if (previewBox.parentNode) previewBox.parentNode.removeChild(previewBox);
-    previewBox = null;
-  }
-  updateSeesaw();
-  updateInfoCards();
 };
 
 resetButton.addEventListener("click", resetSeesaw);
@@ -308,12 +299,6 @@ plankClickArea.addEventListener("click", (event) => {
   refreshPreviewForNext();
 });
 
-window.addEventListener("DOMContentLoaded", () => {
-  nextWeight = getRandomWeight();
-  updateInfoCards();
-  createOrUpdatePreview(nextWeight, 0);
-  hidePreview();
-});
 const settingsToggle = document.querySelector(".seesaw-settings-toggle-button");
 const settingsContainer = document.querySelector(".seesaw-settings-container");
 
@@ -331,4 +316,64 @@ if (settingsToggle && settingsContainer) {
       settingsContainer.classList.remove("open");
     }
   });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const loadedState = loadSeesawState(
+    plank,
+    boxList,
+    logsList,
+    CONFIG,
+    updateBoxStyle,
+    appendLog,
+    updateInfoCards,
+    refreshPreviewForNext,
+    updateSeesaw
+  );
+  if (loadedState) {
+    logs = loadedState.logs;
+    leftWeight = loadedState.leftWeight;
+    rightWeight = loadedState.rightWeight;
+    nextWeight = loadedState.nextWeight;
+    tiltAngle = loadedState.tiltAngle;
+  }
+
+  requestAnimationFrame(() => {
+    if (!nextWeight) nextWeight = getRandomWeight();
+    updateInfoCards();
+    updateSeesaw();
+    setTimeout(() => {
+      createOrUpdatePreview(nextWeight, 0);
+      hidePreview();
+    }, 50);
+  });
+});
+
+window.addEventListener("beforeunload", () => {
+  saveSeesawState(
+    plank,
+    logs,
+    leftWeight,
+    rightWeight,
+    nextWeight,
+    tiltAngle,
+    CONFIG
+  );
+});
+
+function resetSeesaw() {
+  leftWeight = 0;
+  rightWeight = 0;
+  tiltAngle = 0;
+  logs = [];
+  logsList.innerHTML = "";
+  boxList.innerHTML = "";
+
+  if (previewBox) {
+    previewBox.remove();
+    previewBox = null;
+  }
+  updateSeesaw();
+  updateInfoCards();
+  clearSeesawState();
 }
