@@ -69,6 +69,45 @@ When torques on both sides are equal, the plank remains horizontal; otherwise, i
 
 ---
 
+## 🧩 Thought Process & Design Decisions
+
+The goal of this project was to create a simple, interactive physics simulator that helps users visually understand the concept of torque and balance.
+The focus was on clarity, usability, and performance rather than full physical realism.
+
+- The UI layout was intentionally minimal to highlight the seesaw and its motion.
+
+- Color-coded weights and dynamic scaling make each interaction intuitive and informative.
+
+- The real-time logs panel reinforces learning by showing the relationship between position, weight, and tilt.
+
+- The plank tilt animation uses CSS transforms for smooth performance on both desktop and mobile.
+
+- The internal logic was designed in a modular way (updateSeesaw, calculateTiltAngle, etc.) for readability and maintainability.
+
+- LocalStorage persistence was added to retain state between sessions, improving user experience.
+
+---
+
+## ⚖️ Trade-offs & Limitations
+
+While the simulator visually represents balance and torque effectively, several simplifications were made for accessibility:
+
+- Friction, inertia, and oscillation are not simulated to keep performance high and logic easy to follow.
+
+- The system runs entirely client-side, so there’s no real-time synchronization or multi-user support.
+
+- The visual preview of the next box is static — it doesn’t yet simulate the effect it would have if dropped.
+
+---
+
+## 🤝 AI Assistance
+
+AI tools were used for code debugging suggestions, and documentation improvements.
+However, all key logic, structure, and visual decisions were implemented and tested manually to ensure a full understanding of the codebase.
+AI assistance acted as a supporting reviewer, not as a primary author of the project.
+
+---
+
 ## 🧑‍💻 Author
 
 Baran Arslan
